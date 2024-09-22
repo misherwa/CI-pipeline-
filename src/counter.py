@@ -4,6 +4,16 @@ from . import status
 app = Flask(__name__)
 COUNTERS = {}
 
+@app.route('/counters/<name>', methods = ['DELETE'])
+def delete_counter(name):
+    """Delete a counter"""
+    app.logger.info(f"Request to delete counter: {name}")
+    global COUNTERS
+    if name not in COUNTERS:
+        return {"Message": f"Counter {name} does not exist"}, status.HTTP_404_NOT_FOUND
+    del COUNTERS[name]
+    return '', status.HTTP_204_NO_CONTENT
+
 
 @app.route('/counters/<name>', methods=['POST'])
 def create_counter(name):
