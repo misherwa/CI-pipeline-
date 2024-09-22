@@ -46,5 +46,10 @@ class TestCounterEndPoints:
         va = NextRe.get_json().get("ex")
         assert va == 0
 
-
+    def test_to_delete_counter(self, client):
+        re = client.post('/counters/test')
+        assert re.status_code == status.HTTP_201_CREATED
+        counter_delete = client.delete('/counters/test')
+        assert counter_delete.status_code == status.HTTP_204_NO_CONTENT
+        
     
