@@ -4,7 +4,8 @@ from . import status
 app = Flask(__name__)
 COUNTERS = {}
 
-@app.route('/counters/<name>', methods = ['DELETE'])
+
+@app.route('/counters/<name>', methods=['DELETE'])
 def delete_counter(name):
     """Delete a counter"""
     app.logger.info(f"Request to delete counter: {name}")
