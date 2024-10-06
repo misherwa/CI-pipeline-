@@ -52,4 +52,8 @@ class TestCounterEndPoints:
         counter_delete = client.delete('/counters/test')
         assert counter_delete.status_code == status.HTTP_204_NO_CONTENT
         
+    def test_delete_nonexistent_counter(self, client):
+        response = client.delete('/counters/nonexistent')
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
     
